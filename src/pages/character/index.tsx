@@ -1,23 +1,25 @@
 import { Link, useParams } from "react-router";
+import { useCharacterDetail } from "@/hooks";
+import CharacterDetail from "@/components/character-detail";
 
 const Character = () => {
-  const { id } = useParams();
+  const params = useParams();
+  const id = Number(params.id);
 
-  console.log({ id });
+  const { data, error, isLoading } = useCharacterDetail(id);
 
+  //TODO: Loader (?)
+  if (isLoading) return <h2>Loading...</h2>;
+
+  //TODO: Error component (?)
+  if (error) return <h2>Oops, hubo un error</h2>;
+
+  //TODO: Revisar Types
   return (
-    <div>
-      Character
-      <Link style={{ width: "200px", height: "50px" }} to="/favorites">
-        Favorites
-      </Link>
-      <Link style={{ width: "200px", height: "50px" }} to="/">
-        Home
-      </Link>
-      <Link style={{ width: "200px", height: "50px" }} to="/NOEXISTE">
-        Not-Found
-      </Link>
-    </div>
+    <article>
+      <Link to="/">HOME</Link>
+      {data && <CharacterDetail {...data} />}
+    </article>
   );
 };
 export default Character;
