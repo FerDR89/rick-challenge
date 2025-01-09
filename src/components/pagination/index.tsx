@@ -1,20 +1,33 @@
-import { useMemo } from "react";
-
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
   setPage: (value: React.SetStateAction<number>) => void;
+  pagesToShow?: number;
 }
 
-//TODO -> Acortar la cantidad de botones a mostrar
+const Pagination = ({
+  currentPage,
+  totalPages,
+  setPage,
+  pagesToShow = 5,
+}: PaginationProps) => {
+  const half = Math.floor(pagesToShow / 2);
+  let start = Math.max(1, currentPage - half);
+  let end = Math.min(totalPages, currentPage + half);
 
-const Pagination = ({ currentPage, totalPages, setPage }: PaginationProps) => {
-  const totalPagesArr = useMemo(
-    () => Array.from(Array(totalPages).keys(), (n) => n + 1),
-    [totalPages]
+  if (currentPage <= half) {
+    end = Math.min(totalPages, pagesToShow);
+  } else if (currentPage + half > totalPages) {
+    start = Math.max(1, totalPages - pagesToShow + 1);
+  }
+
+  const paginationRange = Array.from(
+    { length: end - start + 1 },
+    (_, i) => start + i
   );
+
   const disablePreviousButton = currentPage === 1;
-  const disableNexButton = currentPage === totalPages;
+  const disableNextButton = currentPage === totalPages;
 
   const onNextPage = () => {
     setPage((currentPage) => currentPage + 1);
@@ -25,27 +38,27 @@ const Pagination = ({ currentPage, totalPages, setPage }: PaginationProps) => {
   };
 
   return (
-    <article>
+    <nav aria-label="Paginación">
       <button onClick={onPreviousPage} disabled={disablePreviousButton}>
-        {"<<"}
+        {"<< Anterior"}
       </button>
       <ul>
-        {totalPagesArr.map((pageNumber) => (
-          <li key={pageNumber}>
+        {paginationRange.map((page) => (
+          <li key={page}>
             <button
-              onClick={() => setPage(pageNumber)}
-              disabled={currentPage === pageNumber}
+              onClick={() => setPage(page)}
+              disabled={currentPage === page}
             >
-              {pageNumber}
+              {page}
             </button>
           </li>
         ))}
       </ul>
-
-      <button onClick={onNextPage} disabled={disableNexButton}>
-        {">>"}
+      <button onClick={onNextPage} disabled={disableNextButton}>
+        {"Siguiente >>"}
       </button>
-    </article>
+    </nav>
   );
 };
+
 export default Pagination;
