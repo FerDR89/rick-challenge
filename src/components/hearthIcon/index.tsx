@@ -6,8 +6,8 @@ interface HearthIconProps {
 
 const HearthIcon = ({
   checked,
-  filledColor = "red",
-  size = "40px",
+  filledColor = "#9D0191",
+  size = "30px",
 }: HearthIconProps) => {
   return checked ? (
     <svg
