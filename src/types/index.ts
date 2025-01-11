@@ -18,10 +18,19 @@ interface Location {
   url: string;
 }
 
-type Status = "Alive | Dead | Unknown";
-type Gender = "Female | Male | Genderless | unknown";
-type Species =
-  "Human|Alien|Humanoid|unknown|Poopybutthole|Mythological Creature|Animal|Robot|Cronenberg|Disease";
+export type Status = "Alive" | "Dead" | "Unknown";
+type Gender = "Female" | "Male" | "Genderless" | "unknown";
+export type Species =
+  | "Human"
+  | "Alien"
+  | "Humanoid"
+  | "unknown"
+  | "Poopybutthole"
+  | "Mythological Creature"
+  | "Animal"
+  | "Robot"
+  | "Cronenberg"
+  | "Disease";
 
 export interface Info {
   info: InfoClass;
