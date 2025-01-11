@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router";
 import Character from "@/pages/character";
 import Favorites from "@/pages/favorites";
 import Home from "@/pages/home";
-import NotFound from "@/pages/not-found";
+import NotFound from "@/pages/notFound";
 
 const MyRouter = () => {
   return (
