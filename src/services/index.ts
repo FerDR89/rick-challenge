@@ -5,13 +5,12 @@ const BASE_URL = "https://rickandmortyapi.com/api";
 
 /*
 This method allows ->
+  get characters by name
   get all characters
   get all characters on a specific page
   get all characters by status
   get all characters by species
-  https://rickandmortyapi.com/documentation/#character
 */
-
 const getCharactersBy = async (
   page: number,
   query: QueryOptions
@@ -49,10 +48,8 @@ const getCharactersBy = async (
 
 /*
 This method allows ->
-  get one character by his/her id
-  https://rickandmortyapi.com/documentation/#character
+  get a character by her/his id
 */
-
 const getCharacterById = async (id: number): Promise<Character> => {
   try {
     const response = await fetch(`${BASE_URL}/character/${id}`);
@@ -71,11 +68,28 @@ const getCharacterById = async (id: number): Promise<Character> => {
 
 /*
 This method allows ->
+  get characters by their id
+*/
+const getCharactersById = async (ids: number[]): Promise<Character[]> => {
+  try {
+    const response = await fetch(`${BASE_URL}/character/${ids}`);
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw { message: result.error, status: response.status };
+    }
+    return result;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+/*
+This method allows ->
   get one episode by its id
   get episodes by their ids
-  https://rickandmortyapi.com/documentation/#episode
 */
-
 const getEpisodesBy = async (episodes: number[]): Promise<Episode[]> => {
   try {
     const response = await fetch(`${BASE_URL}/episode/${episodes}`);
@@ -92,4 +106,4 @@ const getEpisodesBy = async (episodes: number[]): Promise<Episode[]> => {
   }
 };
 
-export { getCharactersBy, getCharacterById, getEpisodesBy };
+export { getCharactersBy, getCharacterById, getEpisodesBy, getCharactersById };
