@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router";
 import { useCharacterDetail } from "@/hooks";
-import CharacterDetail from "@/components/character-detail";
+import CharacterDetail from "@/components/characterDetail";
 
 const Character = () => {
   const params = useParams();
@@ -8,16 +8,11 @@ const Character = () => {
 
   const { data, error, isLoading } = useCharacterDetail(id);
 
-  //TODO: Loader (?)
-  if (isLoading) return <h2>Loading...</h2>;
-
-  //TODO: Error component (?)
-  if (error) return <h2>Oops, hubo un error</h2>;
-
-  //TODO: Revisar Types
   return (
     <article>
       <Link to="/">HOME</Link>
+      {isLoading && <h2>Loading...</h2>}
+      {error && <h2>Oops, hubo un error</h2>}
       {data && <CharacterDetail {...data} />}
     </article>
   );
