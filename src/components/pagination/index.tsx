@@ -1,3 +1,5 @@
+import Button from "../button";
+
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
@@ -39,24 +41,39 @@ const Pagination = ({
 
   return (
     <nav aria-label="Paginación">
-      <button onClick={onPreviousPage} disabled={disablePreviousButton}>
+      <Button
+        onClick={onPreviousPage}
+        disabled={disablePreviousButton}
+        style={{ width: "75px" }}
+      >
         {"<< Anterior"}
-      </button>
+      </Button>
       <ul>
         {paginationRange.map((page) => (
           <li key={page}>
-            <button
+            <Button
               onClick={() => setPage(page)}
               disabled={currentPage === page}
+              style={{
+                width: "40px",
+                minHeight: "0px",
+                height: "40px",
+                backgroundColor: "red",
+                padding: "0",
+              }}
             >
               {page}
-            </button>
+            </Button>
           </li>
         ))}
       </ul>
-      <button onClick={onNextPage} disabled={disableNextButton}>
+      <Button
+        onClick={onNextPage}
+        disabled={disableNextButton}
+        style={{ width: "75px" }}
+      >
         {"Siguiente >>"}
-      </button>
+      </Button>
     </nav>
   );
 };
