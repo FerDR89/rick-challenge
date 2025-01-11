@@ -14,7 +14,7 @@ const CharacterDetail = ({
   gender,
   origin,
   location,
-  episodes,
+  episodes = [],
 }: CharacterDetailProps) => {
   return (
     <article>
