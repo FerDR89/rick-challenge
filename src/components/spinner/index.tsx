@@ -2,10 +2,10 @@ import RingLoader from "react-spinners/RingLoader";
 
 interface SpinnerProps {
   color?: string;
-  size?: string;
+  size?: number;
 }
 
-const Spinner = ({ color = "#79E0EE", size = "100" }: SpinnerProps) => {
+const Spinner = ({ color = "#79E0EE", size = 100 }: SpinnerProps) => {
   return (
     <RingLoader
       color={color}
