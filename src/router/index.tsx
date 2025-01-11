@@ -10,7 +10,7 @@ const NotFound = lazy(() => import("@/pages/notFound"));
 
 const MyRouter = () => {
   return (
-    <Suspense fallback={<Spinner size="250" />}>
+    <Suspense fallback={<Spinner size={250} />}>
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
