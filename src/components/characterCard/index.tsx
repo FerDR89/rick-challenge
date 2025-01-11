@@ -1,7 +1,9 @@
-import { Character } from "@/types";
 import { Link } from "react-router";
-import FavoriteButton from "../favoriteButton";
+import { Character } from "@/types";
 import useFavoriteCharacters from "@/store/favoriteCharacters.store";
+import Text from "../text";
+import FavoriteButton from "../favoriteButton";
+import styles from "./characterCard.module.css";
 
 type CharacterCardProps = Pick<
   Character,
@@ -34,33 +36,35 @@ const CharacterCard = ({
       removeCharacterFromFavorite(id);
       return;
     }
-
     addCharacterToFavorite(id);
   };
 
   return (
-    <article>
-      <div>
-        <h2>{name}</h2>
+    <article className={styles.characterCard}>
+      <header className={styles.characterCard__header_container}>
+        <Text tag="subtitle" text={name} />
         <FavoriteButton onChecked={addOrRemoveCharacter} checked={isFavorite} />
-      </div>
-      <Link to={`/character/${id}`}>
-        <img
-          src={image}
-          alt={"Image of: " + name}
-          loading="lazy"
-          width="300px"
-          height="300px"
-        />
-      </Link>
-      <p>
-        <span>Status: </span>
-        {status}
-      </p>
-      <p>
-        <span>Specie: </span>
-        {species}
-      </p>
+      </header>
+      <main className={styles.characterCard__main_container}>
+        <Link to={`/character/${id}`}>
+          <img
+            src={image}
+            alt={"Image of: " + name}
+            loading="lazy"
+            className={styles.characterCard__main_image}
+          />
+        </Link>
+      </main>
+      <footer className={styles.characterCard__footer_container}>
+        <div className={styles.characterCard__footer_text_container}>
+          <Text tag="text-bold" text="Status: " />
+          <Text tag="text-body" text={status} />
+        </div>
+        <div className={styles.characterCard__footer_text_container}>
+          <Text tag="text-bold" text="Species: " />
+          <Text tag="text-body" text={species} />
+        </div>
+      </footer>
     </article>
   );
 };
