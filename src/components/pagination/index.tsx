@@ -1,4 +1,5 @@
-import Button from "../button";
+import Text from "../text";
+import styles from "./pagination.module.css";
 
 interface PaginationProps {
   currentPage: number;
@@ -40,40 +41,38 @@ const Pagination = ({
   };
 
   return (
-    <nav aria-label="Paginación">
-      <Button
+    <nav aria-label="pagination" className={styles.pagination__container}>
+      <button
         onClick={onPreviousPage}
         disabled={disablePreviousButton}
-        style={{ width: "75px" }}
+        className={styles.pagination__control_button}
+        aria-label="previous page"
       >
-        {"<< Anterior"}
-      </Button>
-      <ul>
+        <Text tag="text-bold" text="<<" />
+      </button>
+
+      <ul className={styles.pagination__dots_container}>
         {paginationRange.map((page) => (
           <li key={page}>
-            <Button
+            <button
               onClick={() => setPage(page)}
               disabled={currentPage === page}
-              style={{
-                width: "40px",
-                minHeight: "0px",
-                height: "40px",
-                backgroundColor: "red",
-                padding: "0",
-              }}
+              className={styles.pagination__dot_button}
+              aria-label={`go to page ${page}`}
             >
               {page}
-            </Button>
+            </button>
           </li>
         ))}
       </ul>
-      <Button
+      <button
         onClick={onNextPage}
         disabled={disableNextButton}
-        style={{ width: "75px" }}
+        className={styles.pagination__control_button}
+        aria-label="next page"
       >
-        {"Siguiente >>"}
-      </Button>
+        <Text tag="text-bold" text=">>" />
+      </button>
     </nav>
   );
 };
