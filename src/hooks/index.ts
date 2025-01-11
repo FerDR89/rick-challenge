@@ -1,9 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import { getCharacterById, getCharactersBy, getEpisodesBy } from "@/services";
+import {
+  getCharacterById,
+  getCharactersBy,
+  getCharactersById,
+  getEpisodesBy,
+} from "@/services";
 import { QueryOptions } from "@/store/filterParams.store.";
 import getEpisodeNumber from "@/utils/getEpisodes";
 
-const useCharacterQuery = (id: number) => {
+const useCharacterQueryById = (id: number) => {
   return useQuery({
     queryKey: ["character", id],
     queryFn: () => getCharacterById(id),
@@ -11,9 +16,27 @@ const useCharacterQuery = (id: number) => {
   });
 };
 
+const useCharactersQueryById = (id: number[]) => {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["charactersById", id],
+    queryFn: () => getCharactersById(id),
+    initialData: [],
+    retry: 1,
+    enabled: Boolean(id.length),
+  });
+
+  const characters = Array.isArray(data) ? data : [data];
+
+  return {
+    data: characters,
+    isLoading,
+    error,
+  };
+};
+
 const useCharactersQuery = (page: number, query: QueryOptions) => {
   return useQuery({
-    queryKey: ["characters", page, query],
+    queryKey: ["allCharacters", page, query],
     queryFn: () => getCharactersBy(page, query),
     retry: 1,
   });
@@ -34,7 +57,7 @@ const useCharacterDetail = (id: number) => {
     data: characterData,
     isLoading: isCharacterLoading,
     error: characterError,
-  } = useCharacterQuery(id);
+  } = useCharacterQueryById(id);
 
   const allEpisodesIds = characterData
     ? getEpisodeNumber(characterData?.episode)
@@ -64,4 +87,9 @@ const useCharacterDetail = (id: number) => {
   };
 };
 
-export { useCharacterDetail, useCharactersQuery, useCharacterQuery };
+export {
+  useCharacterDetail,
+  useCharactersQuery,
+  useCharacterQueryById,
+  useCharactersQueryById,
+};
