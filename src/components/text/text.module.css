@@ -1,12 +1,12 @@
 .text_title {
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size: clamp(32px, 5vw, 40px);
   font-weight: bolder;
   color: var(--primary-font-color);
   text-align: center;
 }
 
 .text_subtitle {
-  font-size: clamp(1.3rem, 2.5vw, 1.5rem);
+  font-size: clamp(20px, 2.5vw, 24px);
   font-weight: 600;
   color: var(--primary-font-color);
 }
