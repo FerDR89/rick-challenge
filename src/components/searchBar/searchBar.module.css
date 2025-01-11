@@ -1,0 +1,35 @@
+.searchbar__container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  margin: 20px 0px;
+  transition: width 300ms linear;
+}
+
+@media (min-width: 769px) {
+  .searchbar__container {
+    width: 664px;
+    justify-content: center;
+  }
+}
+
+.searchbar__input {
+  width: 238px;
+  height: 40px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  padding-left: 8px;
+  transition: border-color 500ms linear;
+}
+
+.searchbar__input:focus {
+  outline: none;
+  border-color: #31e1f7;
+}
+
+@media (min-width: 769px) {
+  .searchbar__input {
+    width: calc(238px * 2);
+  }
+}

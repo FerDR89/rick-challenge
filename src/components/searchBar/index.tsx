@@ -1,4 +1,5 @@
 import Button from "../button";
+import styles from "./searchBar.module.css";
 
 interface SearchBarProps {
   onSearch: (value: string) => void;
@@ -17,11 +18,14 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <input type="text" placeholder="search" name="search" />
-      <Button type="submit" style={{ width: "300px" }}>
-        Search
-      </Button>
+    <form onSubmit={onSubmit} className={styles.searchbar__container}>
+      <input
+        type="text"
+        placeholder="search"
+        name="search"
+        className={styles.searchbar__input}
+      />
+      <Button type="submit">Search</Button>
     </form>
   );
 };
