@@ -1,3 +1,4 @@
+import { QueryOptions } from "@/store/filterParams.store.";
 import { Character, Episode, Info } from "@/types";
 
 const BASE_URL = "https://rickandmortyapi.com/api";
@@ -13,10 +14,26 @@ This method allows ->
 
 const getCharactersBy = async (
   page: number,
-  query?: string
+  query: QueryOptions
 ): Promise<Info & { results: Character[] }> => {
+  let queryParams = "";
+
+  if (query.name) {
+    queryParams = `&name=${query.name}`;
+  }
+
+  if (query.species) {
+    queryParams += `&species=${query.species}`;
+  }
+
+  if (query.status) {
+    queryParams += `&status=${query.status}`;
+  }
+
   try {
-    const response = await fetch(`${BASE_URL}/character/?page=${page}${query}`);
+    const response = await fetch(
+      `${BASE_URL}/character/?page=${page}${queryParams}`
+    );
     const result = await response.json();
 
     if (!response.ok) {
@@ -59,9 +76,7 @@ This method allows ->
   https://rickandmortyapi.com/documentation/#episode
 */
 
-const getEpisodesBy = async (
-  episodes: number | number[]
-): Promise<Episode | Episode[]> => {
+const getEpisodesBy = async (episodes: number[]): Promise<Episode[]> => {
   try {
     const response = await fetch(`${BASE_URL}/episode/${episodes}`);
     const result = await response.json();
