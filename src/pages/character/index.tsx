@@ -3,6 +3,7 @@ import { useCharacterDetail } from "@/hooks";
 import CharacterDetail from "@/components/characterDetail";
 import Spinner from "@/components/spinner";
 import styles from "./character.module.css";
+import Text from "@/components/text";
 
 const Character = () => {
   const params = useParams();
@@ -11,11 +12,18 @@ const Character = () => {
   const { data, error, isLoading } = useCharacterDetail(id);
 
   return (
-    <article className={styles.character__container}>
+    <section className={styles.character__container}>
       {isLoading && <Spinner />}
-      {error && <h2>Oops, hubo un error</h2>}
+      {error && (
+        <Text
+          tag="subtitle"
+          text={
+            "Oops, an error has occurred. Please try again in a few moments."
+          }
+        />
+      )}
       {data && <CharacterDetail {...data} />}
-    </article>
+    </section>
   );
 };
 export default Character;
