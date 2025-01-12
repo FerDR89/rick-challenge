@@ -1,4 +1,6 @@
 import { Character, Episode } from "@/types";
+import Text from "../text";
+import styles from "./characterDetail.module.css";
 
 type CharacterDetailProps = Omit<
   Character,
@@ -17,58 +19,72 @@ const CharacterDetail = ({
   episodes = [],
 }: CharacterDetailProps) => {
   return (
-    <article>
-      <h2>{name}</h2>
-      <img
-        src={image}
-        alt={"Image of: " + name}
-        loading="lazy"
-        width="300px"
-        height="300px"
-      />
-      <p>
-        <span>Status: </span>
-        {status}
-      </p>
-      <p>
-        <span>Specie: </span>
-        {species}
-      </p>
-
-      {type && (
-        <p>
-          <span>Type: </span>
-          {type}
-        </p>
-      )}
-      <p>
-        <span>Gender: </span>
-        {gender}
-      </p>
-      <p>
-        <span>Origin: </span>
-        {origin?.name}
-      </p>
-      <p>
-        <span>Location: </span>
-        {location?.name}
-      </p>
-
-      <h4>Episodes</h4>
-      <ul>
-        {episodes.map(({ id, name, episode }) => (
-          <li key={id} style={{ display: "flex" }}>
-            <p>
-              <span>name: </span>
-              {name}
-            </p>
-            <p>
-              <span>number: </span>
-              {episode}
-            </p>
+    <article className={styles.characterDetail__container}>
+      <header className={styles.characterDetail__header_container}>
+        <Text tag="title" text={name} />
+      </header>
+      <section className={styles.characterDetail__main_container}>
+        <img
+          src={image}
+          alt={"Image of: " + name}
+          loading="lazy"
+          className={styles.characterDetail__main_image}
+        />
+        <ul className={styles.characterDetail__main_list_container}>
+          <li className={styles.characterDetail__main_list_element}>
+            <Text tag="text-bold" text="Status" />
+            <Text tag="text-body" text={status} />
           </li>
-        ))}
-      </ul>
+          <li className={styles.characterDetail__main_list_element}>
+            <Text tag="text-bold" text="Specie" />
+            <Text tag="text-body" text={species} />
+          </li>
+          {type && (
+            <li className={styles.characterDetail__main_list_element}>
+              <Text tag="text-bold" text="Type" />
+              <Text tag="text-body" text={type} />
+            </li>
+          )}
+          <li className={styles.characterDetail__main_list_element}>
+            <Text tag="text-bold" text="Gender" />
+            <Text tag="text-body" text={gender} />
+          </li>
+          <li className={styles.characterDetail__main_list_element}>
+            <Text tag="text-bold" text="Origin" />
+            <Text tag="text-body" text={origin?.name} />
+          </li>
+          <li className={styles.characterDetail__main_list_element}>
+            <Text tag="text-bold" text="Location" />
+            <Text tag="text-body" text={location?.name} />
+          </li>
+        </ul>
+      </section>
+      <footer className={styles.characterDetail__footer_container}>
+        <Text tag="subtitle" text="List of episodes" />
+        <ul className={styles.characterDetail__footer_list_container}>
+          {episodes.map(({ id, name, episode, air_date }) => (
+            <li
+              key={id}
+              style={{ display: "flex" }}
+              className={styles.characterDetail__footer_list_element_container}
+            >
+              <div className={styles.characterDetail__footer_list_element}>
+                <Text tag="text-bold" text="Name:" />
+                <Text tag="text-body" text={name} />
+              </div>
+
+              <div className={styles.characterDetail__footer_list_element}>
+                <Text tag="text-bold" text="Number:" />
+                <Text tag="text-body" text={episode} />
+              </div>
+              <div className={styles.characterDetail__footer_list_element}>
+                <Text tag="text-bold" text="Air Date:" />
+                <Text tag="text-body" text={air_date} />
+              </div>
+            </li>
+          ))}
+        </ul>
+      </footer>
     </article>
   );
 };
