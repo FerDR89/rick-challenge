@@ -1,3 +1,5 @@
+import styles from "./selectFilter.module.css";
+
 interface SelectFilterProps<T> {
   options: string[];
   onSelectChange: (value: T) => void;
@@ -17,9 +19,17 @@ const SelectFilter = <T,>({
   };
 
   return (
-    <select onChange={onChange} value={value}>
+    <select
+      onChange={onChange}
+      value={value}
+      className={styles.selectFilter__container}
+    >
       {options.map((op, idx) => (
-        <option key={op + idx} value={op}>
+        <option
+          key={op + idx}
+          value={op}
+          className={styles.selectFilter__option}
+        >
           {op}
         </option>
       ))}

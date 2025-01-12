@@ -1,0 +1,18 @@
+.selectFilter__container {
+  width: 100%;
+  max-width: 476px;
+  height: 40px;
+  padding-left: 8px;
+  background-color: transparent;
+  border: 1px solid #fff;
+  border-radius: 5px;
+}
+
+.selectFilter__container:focus {
+  outline: none;
+  border-color: #31e1f7;
+}
+
+.selectFilter__option {
+  background-color: #5356ff;
+}
