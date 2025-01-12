@@ -3,7 +3,7 @@ import styles from "./notFound.module.css";
 
 const NotFound = () => {
   return (
-    <article className={styles.notFound__container}>
+    <section className={styles.notFound__container}>
       <Text
         tag="subtitle"
         text="I don't know Rick"
@@ -31,7 +31,7 @@ const NotFound = () => {
           fontSize: "clamp(32px, 5vw, 48px)",
         }}
       />
-    </article>
+    </section>
   );
 };
 export default NotFound;
