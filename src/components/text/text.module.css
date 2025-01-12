@@ -1,5 +1,5 @@
 .text_title {
-  font-size: clamp(32px, 5vw, 40px);
+  font-size: clamp(32px, 5vw, 48px);
   font-weight: bolder;
   color: var(--primary-font-color);
   text-align: center;
