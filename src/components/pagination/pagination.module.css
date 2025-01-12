@@ -25,6 +25,7 @@
   border: none;
   padding: 0px 4px;
   flex-shrink: 0;
+  cursor: pointer;
 }
 
 @media (min-width: 769px) {
@@ -40,6 +41,7 @@
   border-radius: 3px;
   padding: 0px 4px;
   background-color: #5356ff;
+  cursor: pointer;
 }
 
 @media (min-width: 769px) {
