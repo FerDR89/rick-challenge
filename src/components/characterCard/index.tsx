@@ -45,7 +45,7 @@ const CharacterCard = ({
         <Text tag="subtitle" text={name} />
         <FavoriteButton onChecked={addOrRemoveCharacter} checked={isFavorite} />
       </header>
-      <main className={styles.characterCard__main_container}>
+      <section className={styles.characterCard__main_container}>
         <Link to={`/character/${id}`}>
           <img
             src={image}
@@ -54,7 +54,7 @@ const CharacterCard = ({
             className={styles.characterCard__main_image}
           />
         </Link>
-      </main>
+      </section>
       <footer className={styles.characterCard__footer_container}>
         <div className={styles.characterCard__footer_text_container}>
           <Text tag="text-bold" text="Status: " />
