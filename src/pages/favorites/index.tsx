@@ -1,12 +1,12 @@
-import Button from "@/components/button";
-import CharacterCard from "@/components/characterCard";
-import { useCharactersQueryById } from "@/hooks";
 import useFavoriteCharacters from "@/store/favoriteCharacters.store";
-import { useNavigate } from "react-router";
+import { useCharactersQueryById } from "@/hooks";
+import Button from "@/components/button";
+import Text from "@/components/text";
+import CharacterCard from "@/components/characterCard";
+import Spinner from "@/components/spinner";
+import styles from "./favorites.module.css";
 
 const Favorites = () => {
-  const navigate = useNavigate();
-
   const removetAllCharacters = useFavoriteCharacters(
     (state) => state.removetAllCharactersId
   );
@@ -20,27 +20,50 @@ const Favorites = () => {
   } = useCharactersQueryById(charactersIds);
 
   return (
-    <div>
-      <Button style={{ width: "150px" }} onClick={() => navigate("/")}>
-        Home
-      </Button>
+    <section className={styles.favorites__container}>
+      <div className={styles.favorites__title_container}>
+        <Text tag="title" text={"My favorites Characters ❤️"} />
+      </div>
 
-      {isLoading && <h2>Loading...</h2>}
-      {error && <h2>Oops, hubo un error</h2>}
+      {isLoading || error || !charactersIds.length ? (
+        <div className={styles.favorites__status_container}>
+          {isLoading && <Spinner />}
+          {error && (
+            <Text
+              tag="subtitle"
+              text={
+                "Oops, an error has occurred. Please try again in a few moments."
+              }
+            />
+          )}
+          {!charactersIds.length && (
+            <Text
+              tag="subtitle"
+              text={"There are not favorites character yet"}
+            />
+          )}
+        </div>
+      ) : null}
 
-      {charactersIds.length === 0 && (
-        <h2>There are no favorite characters yet</h2>
+      {characters.length > 0 && (
+        <div className={styles.favorites__characters_container}>
+          {characters.map((character) => (
+            <CharacterCard key={character.id} {...character} />
+          ))}
+        </div>
       )}
 
-      {characters.length > 0 &&
-        characters.map((character) => (
-          <CharacterCard key={character.id} {...character} />
-        ))}
-
-      <Button style={{ width: "150px" }} onClick={() => removetAllCharacters()}>
-        Reset Favorites
-      </Button>
-    </div>
+      {characters.length > 0 && (
+        <div className={styles.favorites__remove_btn_container}>
+          <Button
+            onClick={() => removetAllCharacters()}
+            style={{ width: "332px", backgroundColor: "#A31D1D" }}
+          >
+            <Text tag="text-bold" text="Remove all favorites characters" />
+          </Button>
+        </div>
+      )}
+    </section>
   );
 };
 export default Favorites;
