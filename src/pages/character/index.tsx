@@ -1,6 +1,8 @@
-import { Link, useParams } from "react-router";
+import { useParams } from "react-router";
 import { useCharacterDetail } from "@/hooks";
 import CharacterDetail from "@/components/characterDetail";
+import Spinner from "@/components/spinner";
+import styles from "./character.module.css";
 
 const Character = () => {
   const params = useParams();
@@ -9,9 +11,8 @@ const Character = () => {
   const { data, error, isLoading } = useCharacterDetail(id);
 
   return (
-    <article>
-      <Link to="/">HOME</Link>
-      {isLoading && <h2>Loading...</h2>}
+    <article className={styles.character__container}>
+      {isLoading && <Spinner />}
       {error && <h2>Oops, hubo un error</h2>}
       {data && <CharacterDetail {...data} />}
     </article>
