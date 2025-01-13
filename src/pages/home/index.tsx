@@ -1,13 +1,16 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import useFilterParam from "@/store/filterParams.store.";
+import { useCharactersQuery } from "@/hooks";
 import CharacterCard from "@/components/characterCard";
 import Pagination from "@/components/pagination";
 import SearchBar from "@/components/searchBar";
 import SelectFilter from "@/components/selectFilter";
 import Button from "@/components/button";
-import useFilterParam from "@/store/filterParams.store.";
-import { useCharactersQuery } from "@/hooks";
+import Text from "@/components/text";
+import Spinner from "@/components/spinner";
 import { Character, Species, Status } from "@/types";
+import { filterSpeciesOptions, filterStatusOptions } from "./constanst";
+import styles from "./home.module.css";
 
 const Home = () => {
   const [page, setPage] = useState<number>(1);
@@ -32,58 +35,63 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <p>{JSON.stringify(query)}</p>
+    <section className={styles.home__container}>
+      <div className={styles.home__title_container}>
+        <Text tag="title" text="Rick and Morty App" />
+      </div>
 
-      <Link to="/favorites">
-        <Button style={{ width: "150px" }}>FAVORITES</Button>
-      </Link>
+      <div className={styles.home__filters_container}>
+        <SearchBar onSearch={onSearch} />
 
-      <SearchBar onSearch={onSearch} />
+        <SelectFilter
+          onSelectChange={onSpeciesFilter}
+          options={filterSpeciesOptions}
+          value={query.species}
+        />
 
-      <SelectFilter
-        onSelectChange={onSpeciesFilter}
-        options={[
-          "Human",
-          "Alien",
-          "Humanoid",
-          "unknown",
-          "Poopybutthole",
-          "Mythological Creature",
-          "Animal",
-          "Robot",
-          "Cronenberg",
-          "Disease",
-        ]}
-        value={query.species}
-      />
+        <SelectFilter
+          onSelectChange={onStatusFilter}
+          options={filterStatusOptions}
+          value={query.status}
+        />
 
-      <SelectFilter
-        onSelectChange={onStatusFilter}
-        options={["Alive", "Dead", "Unknown"]}
-        value={query.status}
-      />
+        <div className={styles.home__filters_btn_container}>
+          <Button onClick={() => resetQueries()}>Reset filters</Button>
+        </div>
+      </div>
 
-      <Button style={{ width: "150px" }} onClick={() => resetQueries()}>
-        Reset filters
-      </Button>
+      {isLoading || error ? (
+        <div className={styles.home__status_container}>
+          {isLoading && <Spinner />}
+          {error && (
+            <Text
+              tag="subtitle"
+              text={
+                "Oops, an error has occurred. Please try again in a few moments."
+              }
+            />
+          )}
+        </div>
+      ) : null}
 
-      {isLoading && <h2>Loading...</h2>}
-      {error && <h2>Oops, hubo un error</h2>}
-
-      {data &&
-        data?.results.map((character: Character) => (
-          <CharacterCard key={character.id} {...character} />
-        ))}
+      {data && (
+        <div className={styles.home__characters_container}>
+          {data?.results.map((character: Character) => (
+            <CharacterCard key={character.id} {...character} />
+          ))}
+        </div>
+      )}
 
       {data?.info && (
-        <Pagination
-          totalPages={data?.info.pages}
-          currentPage={page}
-          setPage={setPage}
-        />
+        <div className={styles.home__pagination_container}>
+          <Pagination
+            totalPages={data?.info.pages}
+            currentPage={page}
+            setPage={setPage}
+          />
+        </div>
       )}
-    </div>
+    </section>
   );
 };
 
