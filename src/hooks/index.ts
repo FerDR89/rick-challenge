@@ -6,7 +6,7 @@ import {
   getEpisodesBy,
 } from "@/services";
 import { QueryOptions } from "@/store/filterParams.store.";
-import getEpisodeNumber from "@/utils/getEpisodes";
+import getEpisodeNumber from "./getEpisodes";
 
 const useCharacterQueryById = (id: number) => {
   return useQuery({
