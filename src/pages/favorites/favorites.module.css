@@ -6,7 +6,7 @@
 }
 
 .favorites__title_container {
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
 .favorites__status_container {
@@ -21,6 +21,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  row-gap: 24px;
 }
 
 @media (min-width: 769px) {
@@ -33,7 +34,7 @@
 
 .favorites__remove_btn_container {
   width: 100%;
-  margin-top: 16px;
+  margin-top: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
