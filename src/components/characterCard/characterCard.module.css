@@ -1,7 +1,6 @@
 .characterCard {
   max-width: calc(300px + 16px + 16px);
   padding: 16px;
-  margin-bottom: 16px;
   border-radius: 16px;
   background-color: rgb(255, 255, 255, 0.03);
   box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.125);
