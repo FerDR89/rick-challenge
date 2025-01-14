@@ -9,13 +9,17 @@ type ButtonProps = {
   disabled?: boolean;
 };
 
-const Button = ({ children, type, style, onClick }: ButtonProps) => {
+const Button = ({ children, type, style, onClick, disabled }: ButtonProps) => {
   return (
-    <div className={styles.button_container} style={{ ...style }}>
-      <button type={type} className={styles.button} onClick={onClick}>
-        {children}
-      </button>
-    </div>
+    <button
+      type={type}
+      className={styles.button}
+      onClick={onClick}
+      style={style}
+      disabled={disabled}
+    >
+      {children}
+    </button>
   );
 };
 
