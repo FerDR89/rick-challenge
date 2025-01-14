@@ -15,13 +15,11 @@ const FavoriteButton = ({ onChecked, checked }: FavoriteButtonProps) => {
     <Button
       onClick={onClick}
       style={{
-        width: "40px",
-        height: "40px",
+        width: "30px",
+        height: "30px",
         padding: "0px",
-        border: "none",
         borderRadius: "0px",
         backgroundColor: "transparent",
-        cursor: "pointer",
       }}
     >
       <HearthIcon checked={checked} />
