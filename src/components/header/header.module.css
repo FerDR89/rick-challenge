@@ -5,3 +5,7 @@
   align-items: center;
   justify-content: space-between;
 }
+.header__button_container {
+  display: flex;
+  column-gap: 10px;
+}

@@ -18,11 +18,19 @@ const Header = () => {
             </Button>
           </Link>
         ) : (
-          <Link to="/favorites">
-            <Button>
-              <Text tag="text-bold" text="Favorites" />
-            </Button>
-          </Link>
+          <div className={styles.header__button_container}>
+            <Link to="/favorites">
+              <Button>
+                <Text tag="text-bold" text="Favorites" />
+              </Button>
+            </Link>
+
+            <Link to="/lastVisited">
+              <Button>
+                <Text tag="text-bold" text="Last visited" />
+              </Button>
+            </Link>
+          </div>
         )}
       </nav>
     </header>
