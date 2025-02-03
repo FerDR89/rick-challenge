@@ -6,6 +6,7 @@ import Spinner from "@/components/spinner";
 
 const Character = lazy(() => import("@/pages/character"));
 const Favorites = lazy(() => import("@/pages/favorites"));
+const LastVisited = lazy(() => import("@/pages/lastVisited"));
 const NotFound = lazy(() => import("@/pages/notFound"));
 
 const MyRouter = () => {
@@ -16,6 +17,7 @@ const MyRouter = () => {
           <Route path="/" element={<Home />} />
           <Route path="/character/:id" element={<Character />} />
           <Route path="/favorites" element={<Favorites />} />
+          <Route path="/lastVisited" element={<LastVisited />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
