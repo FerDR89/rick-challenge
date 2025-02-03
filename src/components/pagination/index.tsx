@@ -42,14 +42,15 @@ const Pagination = ({
 
   return (
     <nav aria-label="pagination" className={styles.pagination__container}>
-      <button
-        onClick={onPreviousPage}
-        disabled={disablePreviousButton}
-        className={styles.pagination__control_button}
-        aria-label="previous page"
-      >
-        <Text tag="text-bold" text="<<" />
-      </button>
+      {!disablePreviousButton && (
+        <button
+          onClick={onPreviousPage}
+          className={styles.pagination__control_button}
+          aria-label="previous page"
+        >
+          <Text tag="text-bold" text="<<" />
+        </button>
+      )}
 
       <ul className={styles.pagination__dots_container}>
         {paginationRange.map((page) => (
@@ -65,14 +66,16 @@ const Pagination = ({
           </li>
         ))}
       </ul>
-      <button
-        onClick={onNextPage}
-        disabled={disableNextButton}
-        className={styles.pagination__control_button}
-        aria-label="next page"
-      >
-        <Text tag="text-bold" text=">>" />
-      </button>
+
+      {!disableNextButton && (
+        <button
+          onClick={onNextPage}
+          className={styles.pagination__control_button}
+          aria-label="next page"
+        >
+          <Text tag="text-bold" text=">>" />
+        </button>
+      )}
     </nav>
   );
 };

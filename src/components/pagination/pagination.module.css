@@ -1,7 +1,7 @@
 .pagination__container {
   display: flex;
-  justify-content: center;
-  width: 332px;
+  max-width: 332px;
+  column-gap: 10px;
   transition: width 300ms linear;
 }
 
@@ -14,7 +14,7 @@
 .pagination__dots_container {
   width: 100%;
   display: flex;
-  justify-content: space-evenly;
+  column-gap: 5px;
 }
 
 .pagination__control_button {
@@ -23,7 +23,6 @@
   background-color: #3739a5;
   border-radius: 3px;
   border: none;
-  padding: 0px 4px;
   flex-shrink: 0;
   cursor: pointer;
 }
