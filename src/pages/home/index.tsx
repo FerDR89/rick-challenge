@@ -56,7 +56,9 @@ const Home = () => {
         />
 
         <div className={styles.home__filters_btn_container}>
-          <Button onClick={() => resetQueries()}>Reset filters</Button>
+          <Button onClick={() => resetQueries()}>
+            <Text tag="text-bold" text="Reset filters" />
+          </Button>
         </div>
       </div>
 
