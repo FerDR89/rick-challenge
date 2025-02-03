@@ -1,3 +1,4 @@
+import Text from "../text";
 import Button from "../button";
 import styles from "./searchBar.module.css";
 
@@ -25,7 +26,9 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
         name="search"
         className={styles.searchbar__input}
       />
-      <Button type="submit">Search</Button>
+      <Button type="submit">
+        <Text tag="text-bold" text="Search" />
+      </Button>
     </form>
   );
 };
